@@ -1,0 +1,21 @@
+.header {
+	width: 100%;
+	margin-bottom: 2rem;
+	padding: 0.5em;
+	text-align: center;
+	font-size: 1.3em;
+	font-weight: 800;
+}
+
+.pokemon_img_wrapper {
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	border-radius: 100%;
+	padding: 3em;
+	background-image: radial-gradient(rgb(247, 187, 76), transparent);
+}
+
+.pokemon_img {
+	object-fit: contain;
+	width: 200px;
+	height: 200px;
+}
