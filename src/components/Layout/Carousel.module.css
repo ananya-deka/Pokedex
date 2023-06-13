@@ -1,0 +1,27 @@
+.carousel {
+	margin-right: 2rem;
+}
+
+.arrow {
+	right: 0;
+	height: 20%;
+	width: auto;
+	z-index: 2;
+}
+
+.prev {
+	outline: 1px solid red;
+	height: 100%;
+}
+
+.next_arrow {
+	right: 0;
+}
+
+.prev_arrow {
+	left: 0;
+}
+
+.slick-disabled {
+	display: none;
+}

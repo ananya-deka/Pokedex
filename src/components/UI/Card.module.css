@@ -1,0 +1,13 @@
+.card {
+	display: grid;
+	padding: 1rem 2rem;
+	border-radius: 1em;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	background-color: lavender;
+	cursor: pointer;
+	transition: transform 0.3s;
+}
+
+.card:hover {
+	transform: scale(1.05);
+}

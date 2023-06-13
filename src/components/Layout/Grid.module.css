@@ -1,0 +1,7 @@
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 5rem;
+	gap: 3rem;
+}

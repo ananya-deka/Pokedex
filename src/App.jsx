@@ -1,16 +1,8 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import SearchPage from "./pages/SearchPage";
-
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <SearchPage />,
-	},
-]);
 
 function App() {
-	return <RouterProvider router={router} />;
+	return <Outlet />;
 }
 
 export default App;
