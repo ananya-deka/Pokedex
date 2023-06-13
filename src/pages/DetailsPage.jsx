@@ -5,11 +5,13 @@ import Card from "../components/UI/Card";
 import ImageCard from "../components/Details/ImageCard";
 import DetailsCard from "../components/Details/DetailsCard";
 import classes from "./DetailsPage.module.css";
+import { useBookmarks } from "../contexts/bookmark-context";
 
 const DetailPage = () => {
 	const [pokemonDetails, setPokemonDetails] = useState({});
-
 	const params = useParams();
+	const { toggleBookmark } = useBookmarks();
+
 	const id = params.id;
 
 	useEffect(() => {
@@ -23,6 +25,10 @@ const DetailPage = () => {
 		getPokemonDetails(id);
 	}, [id]);
 
+	function handleAddToBookmark() {
+		toggleBookmark(pokemonDetails);
+	}
+
 	return (
 		<section className={classes.container}>
 			<Card>
@@ -31,6 +37,7 @@ const DetailPage = () => {
 						id={pokemonDetails.id}
 						name={pokemonDetails.name}
 						types={pokemonDetails.types}
+						addToBookmark={handleAddToBookmark}
 					/>
 					<DetailsCard
 						name={pokemonDetails.name}

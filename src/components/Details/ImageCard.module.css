@@ -1,6 +1,16 @@
-.pokemon {
+.image_card {
 	min-width: 10%;
 	width: 20%;
+}
+
+.img_wrapper {
+	width: fit-content;
+	padding: 0.5rem;
+	border-radius: 50%;
+	background-color: grey;
+}
+
+.pokemon {
 	display: grid;
 	place-content: center;
 	text-align: center;
