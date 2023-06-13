@@ -10,9 +10,9 @@ const ImageCard = (props) => {
 		<div className={classes.pokemon}>
 			<img
 				className={classes.pokemon_img}
+				width="200"
+				height="100"
 				src={`${imageBaseUrl}/${id}.svg`}
-				width={200}
-				height={100}
 				alt={name}
 			/>
 			<small className={classes.id}>#{id}</small>

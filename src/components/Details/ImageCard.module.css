@@ -1,5 +1,6 @@
 .pokemon {
-	width: 30%;
+	min-width: 10%;
+	width: 20%;
 	display: grid;
 	place-content: center;
 	text-align: center;

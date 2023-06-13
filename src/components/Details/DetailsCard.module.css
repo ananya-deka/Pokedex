@@ -1,17 +1,24 @@
 .details {
 	display: flex;
-}
-
-.pokemon_info {
-	outline: 1px solid red;
-	flex: 1;
-	display: flex;
 	flex-direction: column;
+	flex: 1;
+	padding: 1rem;
 }
 
 .header {
-	padding: 1rem;
 	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.abilities {
+	background-color: rgb(234, 230, 230);
+	padding: 1rem;
+	min-height: 25ch;
+	border-radius: 0.5em;
+}
+
+.abilities__header {
+	margin-bottom: 1rem;
 }
 
 .types {
@@ -20,7 +27,8 @@
 
 .type {
 	display: inline-block;
-	margin: 0.5em;
+	margin-right: 0.5em;
+	margin-bottom: 1em;
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 	background-color: rgb(245, 245, 131);
 	padding: 0.3em 1em;

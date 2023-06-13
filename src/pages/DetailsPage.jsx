@@ -4,6 +4,7 @@ import requests from "../api/requests";
 import Card from "../components/UI/Card";
 import ImageCard from "../components/Details/ImageCard";
 import DetailsCard from "../components/Details/DetailsCard";
+import classes from "./DetailsPage.module.css";
 
 const DetailPage = () => {
 	const [pokemonDetails, setPokemonDetails] = useState({});
@@ -23,17 +24,25 @@ const DetailPage = () => {
 	}, [id]);
 
 	return (
-		<Card>
-			<ImageCard
-				id={pokemonDetails.id}
-				name={pokemonDetails.name}
-				types={pokemonDetails.types}
-			/>
-			<DetailsCard
-				name={pokemonDetails.name}
-				abilities={pokemonDetails.abilities}
-			/>
-		</Card>
+		<section className={classes.container}>
+			<Card>
+				<div className={classes.card_content}>
+					<ImageCard
+						id={pokemonDetails.id}
+						name={pokemonDetails.name}
+						types={pokemonDetails.types}
+					/>
+					<DetailsCard
+						name={pokemonDetails.name}
+						abilities={pokemonDetails.abilities}
+						weight={pokemonDetails.weight}
+						height={pokemonDetails.height}
+						exp={pokemonDetails.base_experience}
+						stats={pokemonDetails.stats}
+					/>
+				</div>
+			</Card>
+		</section>
 	);
 };
 

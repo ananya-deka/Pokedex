@@ -17,7 +17,6 @@ const DetailsCard = (props) => {
 				const abilityDetails = await response.json();
 				currentAbilities.push(abilityDetails);
 			}
-			console.log(currentAbilities);
 			setAblityDetails(currentAbilities);
 		}
 
@@ -39,11 +38,12 @@ const DetailsCard = (props) => {
 	}
 
 	return (
-		<div className={classes.details}>
-			<div className={classes.pokemon_info}>
-				<header className={classes.header}>
-					<h2>{name.toUpperCase()}</h2>
-				</header>
+		<section className={classes.details}>
+			<header className={classes.header}>
+				<h2>{name.toUpperCase()}</h2>
+			</header>
+			<section className={classes.abilities}>
+				<header className={classes.abilities__header}>Abilities</header>
 				<ul className={classes.types}>
 					{abilityDetails.map((ability) => (
 						<li
@@ -65,8 +65,31 @@ const DetailsCard = (props) => {
 							(detail) => detail.language.name === "en"
 						).effect}
 				</div>
+			</section>
+			<div>
+				<div>
+					<span>Height</span>
+					{props.height}
+				</div>
+				<div>
+					<span>Weight</span>
+					{props.weight}
+				</div>
+				<div>
+					<span>Base Experience</span>
+					{props.exp}
+				</div>
 			</div>
-		</div>
+			<div>
+				{props.stats &&
+					props.stats.map((stat, idx) => (
+						<div key={idx}>
+							<span>{stat.stat.name}</span>
+							<span>{stat.base_stat}</span>
+						</div>
+					))}
+			</div>
+		</section>
 	);
 };
 
