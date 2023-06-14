@@ -8,6 +8,7 @@ import SearchPage from "./pages/SearchPage";
 import ListingPage from "./pages/ListingPage";
 import DetailsPage from "./pages/DetailsPage.jsx";
 import BookmarksPage from "./pages/BookmarksPage.jsx";
+import FilterPage from "./pages/FilterPage.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
 			{
 				path: "/browse/:id?",
 				element: <ListingPage />,
+			},
+			{
+				path: "/filter/:filterType",
+				element: <FilterPage />,
 			},
 			{
 				path: "/details/:id",

@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./ShowAll.module.css";
-import useFetchAllPokemon from "../../hooks/useFetchAllPokemon";
+import useFetch from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
+import requests from "../../api/requests";
 
 const ShowAll = () => {
 	const navigate = useNavigate();
 	const [currentPage, setCurrentPage] = useState(0);
-	const { isLoading, allPokemon } = useFetchAllPokemon(currentPage);
+	const { isLoading, allPokemon } = useFetch(
+		requests.getAllPokemon,
+		currentPage
+	);
 
 	useEffect(() => {
 		if (allPokemon.length > 0 && !isLoading) {

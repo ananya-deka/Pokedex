@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import requests from "../api/requests";
 
-const useFetchAllPokemon = (pageNumber) => {
+const useFetch = (request, pageNumber) => {
 	const [allPokemon, setAllPokemon] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(true);
@@ -15,11 +14,10 @@ const useFetchAllPokemon = (pageNumber) => {
 		if (pageNumber >= 1) {
 			setIsLoading(true);
 			const offset = (pageNumber - 1) * 10;
-			fetch(`${requests.getAllPokemon}&offset=${offset}`)
+			fetch(`${request}&offset=${offset}`)
 				.then((res) => res.json())
 				.then((data) => {
 					const results = data.results;
-					console.log(data);
 					const currentPokemon = results.map((result) => ({
 						...result,
 						id: getId(result.url),
@@ -34,9 +32,9 @@ const useFetchAllPokemon = (pageNumber) => {
 					console.log(e);
 				});
 		}
-	}, [pageNumber, setAllPokemon, setIsLoading, setHasMore]);
+	}, [pageNumber, setAllPokemon, setIsLoading, setHasMore, request]);
 
 	return { allPokemon, isLoading, hasMore };
 };
 
-export default useFetchAllPokemon;
+export default useFetch;

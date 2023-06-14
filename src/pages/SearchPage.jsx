@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import requests from "../api/requests";
 import ShowAll from "../components/Browse/ShowAll";
+import FilterOptions from "../components/Filter/FilterOptions";
 
 const SearchPage = () => {
 	const inputRef = useRef();
@@ -38,6 +39,7 @@ const SearchPage = () => {
 			</form>
 			<ShowAll />
 			{isLoading && <p>Loading...</p>}
+			<FilterOptions />
 		</Container>
 	);
 };
