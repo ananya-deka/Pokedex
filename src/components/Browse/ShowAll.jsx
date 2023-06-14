@@ -1,29 +1,25 @@
 import { useNavigate } from "react-router-dom";
-import requests from "../../api/requests";
 import classes from "./ShowAll.module.css";
+import useFetchAllPokemon from "../../hooks/useFetchAllPokemon";
+import { useEffect, useState } from "react";
 
 const ShowAll = () => {
 	const navigate = useNavigate();
-	function getId(url) {
-		const id = +url.split("/").slice(-2, -1);
-		return id;
-	}
+	const [currentPage, setCurrentPage] = useState(0);
+	const { isLoading, allPokemon } = useFetchAllPokemon(currentPage);
 
-	async function getAllPokemon() {
-		const response = await fetch(requests.getAllPokemon);
-		const data = await response.json();
+	useEffect(() => {
+		if (allPokemon.length > 0 && !isLoading) {
+			navigate("/browse", { state: { pokemon: allPokemon } });
+		}
+	}, [allPokemon, navigate, isLoading]);
 
-		const results = data.results;
-		const allPokemon = results.map((result) => ({
-			...result,
-			id: getId(result.url),
-		}));
-
-		navigate("/browse", { state: { pokemon: allPokemon } });
+	function handleGetAllPokemon() {
+		setCurrentPage(1);
 	}
 
 	return (
-		<button onClick={getAllPokemon} className={classes.show_all_btn}>
+		<button onClick={handleGetAllPokemon} className={classes.show_all_btn}>
 			Catch `em all!
 		</button>
 	);

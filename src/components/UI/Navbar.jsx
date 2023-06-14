@@ -6,7 +6,9 @@ const Navbar = () => {
 	return (
 		<nav className={classes.navbar}>
 			<div className={classes.logo}>
-				<img src={pokemonLogo} width={50} height={50} />
+				<Link to={"/"}>
+					<img src={pokemonLogo} width={50} height={50} />
+				</Link>
 			</div>
 			<ul className={classes.navbar__options}>
 				<li className={classes.navbar__option}>
