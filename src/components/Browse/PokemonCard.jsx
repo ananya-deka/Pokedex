@@ -13,7 +13,7 @@ const PokemonCard = ({ pokemon }) => {
 	return (
 		<Card showDetails={handleNavigation} key={pokemon.id}>
 			<header className={classes.header}>
-				<h2>{pokemon.name.toUpperCase()}</h2>
+				<h2>{pokemon.name && pokemon.name.toUpperCase()}</h2>
 			</header>
 			<div className={classes.pokemon_img_wrapper}>
 				<img

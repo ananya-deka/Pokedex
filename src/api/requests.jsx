@@ -7,8 +7,8 @@ const requests = {
 	getPokemon: (id) => `${endpoint}/pokemon/${id}?limit=10`,
 	getColor: (id) => `${endpoint}/pokemon-color/${id}`,
 	getAllAbilities: `${endpoint}/ability?limit=10,`,
-	getAllForms: `${endpoint}/pokemon-form?limit=400,`,
-	getAllSpecies: `${endpoint}/pokemon-species?limit=400,`,
+	getAllForms: `${endpoint}/pokemon-form?limit=10,`,
+	getAllSpecies: `${endpoint}/pokemon-species?limit=10,`,
 };
 
 export default requests;

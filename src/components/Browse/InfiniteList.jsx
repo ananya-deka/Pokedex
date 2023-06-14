@@ -1,46 +1,21 @@
 import Grid from "../Layout/Grid";
-import PokemonCard from "./PokemonCard";
-import { useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import requests from "../../api/requests";
 import { useDetectLastNode } from "../../hooks/useDetectLastNode";
 
-const InfiniteList = ({ pokemons }) => {
-	const [currentPage, setCurrentPage] = useState(1);
-	const { allPokemon, isLoading, hasMore } = useFetch(
-		requests.getAllPokemon,
-		currentPage > 1 ? currentPage : 0
-	);
-
+const InfiniteList = ({ isLoading, hasMore, setCurrentPage, children }) => {
 	const { lastNodeObserver } = useDetectLastNode(
 		isLoading,
 		hasMore,
 		setCurrentPage
 	);
 
+	function addRef(child) {
+		return { ...child, ref: lastNodeObserver };
+	}
+
 	return (
 		<Grid>
-			{pokemons.map((pokemon, index) =>
-				pokemons.length === index + 1 ? (
-					<div key={pokemon.id} ref={lastNodeObserver}>
-						<PokemonCard pokemon={pokemon} />
-					</div>
-				) : (
-					<div key={pokemon.id}>
-						<PokemonCard pokemon={pokemon} />
-					</div>
-				)
-			)}
-			{allPokemon.map((pokemon, index) =>
-				allPokemon.length === index + 1 ? (
-					<div key={pokemon.id} ref={lastNodeObserver}>
-						<PokemonCard pokemon={pokemon} />
-					</div>
-				) : (
-					<div key={pokemon.id}>
-						<PokemonCard pokemon={pokemon} />
-					</div>
-				)
+			{children.map((child, index) =>
+				children.length === index + 1 ? addRef(child) : child
 			)}
 		</Grid>
 	);

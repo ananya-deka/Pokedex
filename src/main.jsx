@@ -25,8 +25,12 @@ const router = createBrowserRouter([
 				element: <ListingPage />,
 			},
 			{
-				path: "/filter/:filterType",
+				path: "/filter/:filterType/",
 				element: <FilterPage />,
+			},
+			{
+				path: "/filter/:filterType/:filterId?",
+				element: <ListingPage />,
 			},
 			{
 				path: "/details/:id",

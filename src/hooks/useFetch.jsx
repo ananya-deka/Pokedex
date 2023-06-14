@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (request, pageNumber) => {
-	const [allPokemon, setAllPokemon] = useState([]);
+const useFetch = (initial, request, pageNumber) => {
+	const [allItems, setAllItems] = useState(initial);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(true);
 
@@ -11,19 +11,21 @@ const useFetch = (request, pageNumber) => {
 	}
 
 	useEffect(() => {
-		if (pageNumber >= 1) {
+		if (request && (initial.length === 0 || pageNumber > 1)) {
 			setIsLoading(true);
 			const offset = (pageNumber - 1) * 10;
 			fetch(`${request}&offset=${offset}`)
 				.then((res) => res.json())
 				.then((data) => {
 					const results = data.results;
-					const currentPokemon = results.map((result) => ({
+					const current = results.map((result) => ({
 						...result,
 						id: getId(result.url),
 					}));
 
-					setAllPokemon((pokemon) => [...pokemon, ...currentPokemon]);
+					setAllItems((prevItems) =>
+						pageNumber === 1 ? current : [...prevItems, ...current]
+					);
 
 					setIsLoading(false);
 					setHasMore(results && results.length > 0);
@@ -32,9 +34,9 @@ const useFetch = (request, pageNumber) => {
 					console.log(e);
 				});
 		}
-	}, [pageNumber, setAllPokemon, setIsLoading, setHasMore, request]);
+	}, [initial, pageNumber, setAllItems, setIsLoading, setHasMore, request]);
 
-	return { allPokemon, isLoading, hasMore };
+	return { allItems, isLoading, hasMore };
 };
 
 export default useFetch;

@@ -7,7 +7,8 @@ import requests from "../../api/requests";
 const ShowAll = () => {
 	const navigate = useNavigate();
 	const [currentPage, setCurrentPage] = useState(0);
-	const { isLoading, allPokemon } = useFetch(
+	const { isLoading, allItems: allPokemon } = useFetch(
+		[],
 		requests.getAllPokemon,
 		currentPage
 	);
