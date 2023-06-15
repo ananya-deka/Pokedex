@@ -1,0 +1,37 @@
+.stats {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	text-transform: uppercase;
+}
+
+.stat {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 2rem;
+	gap: 1rem;
+}
+
+.val {
+	background-color: rgb(243, 116, 116);
+	height: 100%;
+}
+
+.stat__name {
+	width: 40%;
+	font-size: 0.8em;
+	font-weight: 600;
+}
+
+.stat__value {
+	width: 60%;
+	display: flex;
+	gap: 1rem;
+}
+
+.bar {
+	width: 100%;
+	background-color: rgb(214, 214, 214);
+	display: flex;
+}

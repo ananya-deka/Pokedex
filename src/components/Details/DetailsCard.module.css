@@ -1,0 +1,47 @@
+.details {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 2rem;
+	border-radius: 1em;
+	background-color: whitesmoke;
+	min-height: 35rem;
+}
+
+.tabs {
+	list-style: none;
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 2rem;
+	color: grey;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.tab {
+	padding-right: 1em;
+}
+
+.types {
+	list-style: none;
+}
+
+.type {
+	display: inline-block;
+	margin-right: 0.5em;
+	margin-bottom: 1em;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	background-color: rgb(245, 245, 131);
+	padding: 0.3em 1em;
+	border-radius: 0.7em;
+	cursor: pointer;
+}
+
+.type:hover {
+	background-color: rgba(245, 245, 131, 0.5);
+}
+
+.selected {
+	color: #333;
+	border-bottom: 1px solid green;
+}
