@@ -1,6 +1,7 @@
 import Grid from "../Layout/Grid";
 import { useDetectLastNode } from "../../hooks/useDetectLastNode";
 import Header from "../UI/Header";
+import { Spinner } from "@chakra-ui/react";
 
 const InfiniteList = ({
 	title,
@@ -26,6 +27,7 @@ const InfiniteList = ({
 				{children.map((child, index) =>
 					children.length === index + 1 ? addRef(child) : child
 				)}
+				{isLoading && <Spinner />}
 			</Grid>
 		</section>
 	);

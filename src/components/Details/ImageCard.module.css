@@ -17,6 +17,12 @@
 	justify-content: flex-end;
 }
 
+.logo {
+	padding: 0.2em;
+	border-radius: 50%;
+	background-color: #ddd;
+}
+
 .info {
 	margin-top: 1rem;
 	display: flex;

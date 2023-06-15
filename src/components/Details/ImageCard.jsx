@@ -20,20 +20,23 @@ const ImageCard = (props) => {
 		<section className={classes.image_card}>
 			{id && name && types ? (
 				<>
-					<div
-						className={classes.logo_wrapper}
-						onClick={props.addToBookmark}
-					>
-						<img
-							src={
-								bookmarks[id]
-									? filledBookmarkLogo
-									: bookmarkLogo
-							}
-							height={40}
-							width={40}
-						/>
+					<div className={classes.logo_wrapper}>
+						<div
+							className={classes.logo}
+							onClick={props.addToBookmark}
+						>
+							<img
+								src={
+									bookmarks[id]
+										? filledBookmarkLogo
+										: bookmarkLogo
+								}
+								height={40}
+								width={40}
+							/>
+						</div>
 					</div>
+
 					<div className={classes.info}>
 						<p className={classes.name}>{name}</p>
 						<p className={classes.id}>#{id}</p>
