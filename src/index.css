@@ -4,8 +4,14 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "EB Garamond", serif;
 }
 
 img {
 	display: block;
+}
+
+button,
+input {
+	font: inherit;
 }

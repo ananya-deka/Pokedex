@@ -25,7 +25,7 @@ const ShowAll = () => {
 
 	return (
 		<button onClick={handleGetAllPokemon} className={classes.show_all_btn}>
-			Catch `em all!
+			Go on and catch `em all!
 		</button>
 	);
 };

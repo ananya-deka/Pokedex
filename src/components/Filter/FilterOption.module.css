@@ -1,12 +1,14 @@
 .option {
-	background-color: lavender;
+	background-color: #ebb02d;
 	border-radius: 0.5em;
 	padding: 1em;
 	font-weight: 500;
 	cursor: pointer;
 	transition: background-color 0.3s;
+	font-weight: 600;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .option:hover {
-	background-color: rgb(215, 215, 246);
+	background-color: #f7c352;
 }

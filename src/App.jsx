@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import "./App.css";
+import classes from "./App.module.css";
 import BookmarksProvider from "./contexts/bookmark-context";
 import Navbar from "./components/UI/Navbar";
 
@@ -7,7 +7,9 @@ function App() {
 	return (
 		<BookmarksProvider>
 			<Navbar />
-			<Outlet />
+			<section className={classes.container}>
+				<Outlet />
+			</section>
 		</BookmarksProvider>
 	);
 }

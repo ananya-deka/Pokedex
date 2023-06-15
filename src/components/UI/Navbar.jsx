@@ -1,8 +1,17 @@
 import classes from "./Navbar.module.css";
-import { Link } from "react-router-dom";
-import pokemonLogo from "../../assets/pokemon-logo-png-1447.png";
+import { Link, useLocation } from "react-router-dom";
+import pokemonLogo from "../../assets/pokemon-icon.png";
 
 const Navbar = () => {
+	const location = useLocation();
+	const currentPage =
+		location.pathname === "/"
+			? "home"
+			: location.pathname === "/bookmarks"
+			? "bookmarks"
+			: "";
+
+	console.log(currentPage);
 	return (
 		<nav className={classes.navbar}>
 			<div className={classes.logo}>
@@ -11,10 +20,18 @@ const Navbar = () => {
 				</Link>
 			</div>
 			<ul className={classes.navbar__options}>
-				<li className={classes.navbar__option}>
+				<li
+					className={`${classes.navbar__option} ${
+						currentPage === "home" ? classes.selected : null
+					}`}
+				>
 					<Link to={"/"}>Home</Link>
 				</li>
-				<li className={classes.navbar__option}>
+				<li
+					className={`${classes.navbar__option} ${
+						currentPage === "bookmarks" ? classes.selected : null
+					}`}
+				>
 					<Link to={"/bookmarks"}>Bookmarks</Link>
 				</li>
 			</ul>

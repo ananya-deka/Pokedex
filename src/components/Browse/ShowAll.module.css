@@ -1,6 +1,16 @@
 .show_all_btn {
 	border: 1px solid black;
-	padding: 0.5em 1em;
-	border-radius: 0.2em;
+	padding: 0.6em 1em;
+	border-radius: 0.3em;
 	width: 100%;
+	background-color: rgb(241, 39, 39);
+	border: 1px solid transparent;
+	color: white;
+	font-size: 1.2em;
+	transition: background-color 0.2s;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.show_all_btn:hover {
+	background-color: rgb(216, 39, 39);
 }
