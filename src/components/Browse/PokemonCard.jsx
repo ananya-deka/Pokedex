@@ -8,6 +8,7 @@ const PokemonCard = ({ pokemon }) => {
 	const navigate = useNavigate();
 	const [hovered, setHovered] = useState(false);
 
+	console.log(pokemon);
 	function handleNavigation() {
 		navigate(`/details/${pokemon.id}`);
 	}

@@ -2,23 +2,24 @@
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	padding: 1rem;
+	padding: 2rem;
+	border-radius: 1em;
+	background-color: whitesmoke;
+	min-height: 35rem;
 }
 
-.header {
-	font-weight: 700;
-	margin-bottom: 1rem;
+.tabs {
+	list-style: none;
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 2rem;
+	color: grey;
+	font-weight: 600;
+	cursor: pointer;
 }
 
-.abilities {
-	background-color: rgb(234, 230, 230);
-	padding: 1rem;
-	min-height: 25ch;
-	border-radius: 0.5em;
-}
-
-.abilities__header {
-	margin-bottom: 1rem;
+.tab {
+	padding-right: 1em;
 }
 
 .types {
@@ -41,5 +42,6 @@
 }
 
 .selected {
-	outline: 1px solid red;
+	color: #333;
+	border-bottom: 1px solid green;
 }

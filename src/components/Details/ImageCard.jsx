@@ -12,13 +12,27 @@ const ImageCard = (props) => {
 
 	return (
 		<section className={classes.image_card}>
-			<div className={classes.img_wrapper} onClick={props.addToBookmark}>
+			<div className={classes.logo_wrapper} onClick={props.addToBookmark}>
 				<img
 					src={bookmarks[id] ? filledBookmarkLogo : bookmarkLogo}
 					height={40}
 					width={40}
 				/>
 			</div>
+			<div className={classes.info}>
+				<p className={classes.name}>
+					{props.name && props.name.toUpperCase()}
+				</p>
+				<p className={classes.id}>#{id}</p>
+			</div>
+
+			<ul className={classes.types}>
+				{types.map((type) => (
+					<li className={classes.type} key={type.slot}>
+						{type.type.name}
+					</li>
+				))}
+			</ul>
 
 			<div className={classes.pokemon}>
 				<img
@@ -28,14 +42,6 @@ const ImageCard = (props) => {
 					src={`${imageBaseUrl}/${id}.svg`}
 					alt={name}
 				/>
-				<small className={classes.id}>#{id}</small>
-				<ul className={classes.types}>
-					{types.map((type) => (
-						<li className={classes.type} key={type.slot}>
-							{type.type.name}
-						</li>
-					))}
-				</ul>
 			</div>
 		</section>
 	);

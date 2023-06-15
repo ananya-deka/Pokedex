@@ -1,93 +1,62 @@
+import AboutContent from "./AboutContent";
 import classes from "./DetailsCard.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import StatsContent from "./StatsContent";
+import MovesContent from "./MovesContent";
 
 const DetailsCard = (props) => {
-	const [abilityDetails, setAblityDetails] = useState([]);
-	const [selectedAbility, setSelectedAbility] = useState({});
-	const [selectedAbilityDetails, setSelectedAbilityDetails] = useState([]);
+	const [selectedTab, setSelectedTab] = useState("about");
 
-	const name = props.name || "";
-	const abilities = props.abilities;
+	const description = props.species.flavor_text_entries
+		? props.species.flavor_text_entries[0].flavor_text
+		: "";
 
-	useEffect(() => {
-		async function getAbilities() {
-			const currentAbilities = [];
-			for (let i = 0; i < abilities.length; i++) {
-				const response = await fetch(abilities[i].ability.url);
-				const abilityDetails = await response.json();
-				currentAbilities.push(abilityDetails);
-			}
-			setAblityDetails(currentAbilities);
-		}
-
-		if (abilities) {
-			getAbilities();
-		}
-	}, [abilities]);
-
-	useEffect(() => {
-		if (abilityDetails.length > 0) {
-			setSelectedAbilityDetails(abilityDetails[0].effect_entries);
-			setSelectedAbility(abilityDetails[0]);
-		}
-	}, [abilityDetails]);
-
-	function handleAbilitySelection(ability) {
-		setSelectedAbility(ability);
-		setSelectedAbilityDetails(ability.effect_entries);
+	function handleTabClick(tab) {
+		setSelectedTab(tab);
 	}
 
 	return (
 		<section className={classes.details}>
-			<header className={classes.header}>
-				<h2>{name.toUpperCase()}</h2>
-			</header>
-			<section className={classes.abilities}>
-				<header className={classes.abilities__header}>Abilities</header>
-				<ul className={classes.types}>
-					{abilityDetails.map((ability) => (
-						<li
-							key={ability.id}
-							onClick={handleAbilitySelection.bind(null, ability)}
-							className={`${classes.type} ${
-								selectedAbility.id === ability.id
-									? classes.selected
-									: null
-							}`}
-						>
-							{ability.name}
-						</li>
-					))}
-				</ul>
-				<div className={classes.ability_details}>
-					{selectedAbilityDetails.length > 0 &&
-						selectedAbilityDetails.find(
-							(detail) => detail.language.name === "en"
-						).effect}
-				</div>
-			</section>
-			<div>
-				<div>
-					<span>Height</span>
-					{props.height}
-				</div>
-				<div>
-					<span>Weight</span>
-					{props.weight}
-				</div>
-				<div>
-					<span>Base Experience</span>
-					{props.exp}
-				</div>
-			</div>
-			<div>
-				{props.stats &&
-					props.stats.map((stat, idx) => (
-						<div key={idx}>
-							<span>{stat.stat.name}</span>
-							<span>{stat.base_stat}</span>
-						</div>
-					))}
+			<ul className={classes.tabs}>
+				<li
+					className={`${classes.tab} ${
+						selectedTab === "about" ? classes.selected : null
+					}`}
+					onClick={handleTabClick.bind(null, "about")}
+				>
+					About
+				</li>
+				<li
+					className={`${classes.tab} ${
+						selectedTab === "stats" ? classes.selected : null
+					}`}
+					onClick={handleTabClick.bind(null, "stats")}
+				>
+					Base Stats
+				</li>
+				<li
+					className={`${classes.tab} ${
+						selectedTab === "moves" ? classes.selected : null
+					}`}
+					onClick={handleTabClick.bind(null, "moves")}
+				>
+					Moves
+				</li>
+			</ul>
+			<div className={classes.content}>
+				{selectedTab === "about" ? (
+					<AboutContent
+						description={description}
+						height={props.height}
+						weight={props.weight}
+						abilities={props.abilities}
+						experience={props.exp}
+					/>
+				) : selectedTab === "stats" ? (
+					<StatsContent stats={props.stats} />
+				) : (
+					<MovesContent moves={props.moves} />
+				)}
 			</div>
 		</section>
 	);
