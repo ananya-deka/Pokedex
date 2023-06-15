@@ -8,9 +8,9 @@
 
 .grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+	place-content: center;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 	width: 100%;
 	grid-auto-rows: 1fr;
-	gap: 2rem;
-	padding: 5rem;
+	gap: 3rem;
 }

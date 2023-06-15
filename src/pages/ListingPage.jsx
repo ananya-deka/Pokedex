@@ -22,6 +22,7 @@ const ListingPage = () => {
 		<List pokemons={pokemon} />
 	) : (
 		<InfiniteList
+			title="Pokemon"
 			setCurrentPage={setCurrentPage}
 			isLoading={isLoading}
 			hasMore={hasMore}
