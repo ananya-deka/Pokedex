@@ -8,7 +8,9 @@ const DetailsCard = (props) => {
 	const [selectedTab, setSelectedTab] = useState("about");
 
 	const description = props.species.flavor_text_entries
-		? props.species.flavor_text_entries[0].flavor_text
+		? props.species.flavor_text_entries.find(
+				(text) => text.language.name === "en"
+		  ).flavor_text
 		: "";
 
 	function handleTabClick(tab) {
@@ -50,7 +52,7 @@ const DetailsCard = (props) => {
 						height={props.height}
 						weight={props.weight}
 						abilities={props.abilities}
-						experience={props.exp}
+						experience={props.exp || 0}
 					/>
 				) : selectedTab === "stats" ? (
 					<StatsContent stats={props.stats} />

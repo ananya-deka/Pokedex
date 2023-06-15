@@ -6,18 +6,25 @@ import ShowAll from "../components/Browse/ShowAll";
 import FilterOptions from "../components/Filter/FilterOptions";
 import SearchBar from "../components/UI/SearchBar";
 import pokemonLogo from "../assets/pokemon-logo.png";
+import { Spinner } from "@chakra-ui/react";
 
 const SearchPage = () => {
 	const inputRef = useRef();
 	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState();
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState("");
 
 	async function getPokemon(id) {
 		setIsLoading(true);
+		setError(false);
 		const response = await fetch(requests.getPokemon(id));
-		const data = await response.json();
-
-		return data;
+		if (!response.ok) {
+			const error = await response.text();
+			setError(error);
+		} else {
+			const data = await response.json();
+			return data;
+		}
 	}
 
 	async function handleSearch(e) {
@@ -27,7 +34,9 @@ const SearchPage = () => {
 		const pokemon = await getPokemon(pokemonId);
 		setIsLoading(false);
 
-		navigate(`/browse/${pokemonId}`, { state: { pokemon: [pokemon] } });
+		if (pokemon) {
+			navigate(`/browse/${pokemonId}`, { state: { pokemon: [pokemon] } });
+		}
 	}
 
 	return (
@@ -39,12 +48,22 @@ const SearchPage = () => {
 				placeholder="Search for your favourite pokemon"
 				ref={inputRef}
 				search={handleSearch}
+				disabled={isLoading}
 			/>
+			<div className={classes.status}>
+				{isLoading && (
+					<>
+						Loading...
+						<Spinner />
+					</>
+				)}
+				{error && <p className={classes.error}>Error: {error}</p>}
+			</div>
 			<div className={classes.text}>
 				<p>OR...</p>
 			</div>
 			<ShowAll />
-			{isLoading && <p>Loading...</p>}
+
 			<FilterOptions />
 		</section>
 	);

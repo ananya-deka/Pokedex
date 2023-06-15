@@ -1,3 +1,4 @@
+import Skeleton from "../UI/Skeleton";
 import classes from "./AboutContent.module.css";
 import { useEffect, useState } from "react";
 
@@ -42,23 +43,35 @@ const AboutContent = ({
 
 	return (
 		<div className={classes.about}>
-			<p className={classes.description}>
-				{description.replace("\f", " ")}
-			</p>
+			{description ? (
+				<p className={classes.description}>
+					{description.replace("\f", " ")}
+				</p>
+			) : (
+				<Skeleton text={true} />
+			)}
+
 			<ul className={`${classes.list} ${classes.measurements}`}>
-				<li className={classes.list__item}>
-					<p>Height</p>
-					<p>{(height / 10).toFixed(1)}m</p>
-				</li>
-				<li className={classes.list__item}>
-					<p>Weight</p>
-					<p>{(weight / 10).toFixed(1)}kg</p>
-				</li>
-				<li className={classes.list__item}>
-					<p>Base Experience</p>
-					<p>{experience}</p>
-				</li>
+				{height && weight && experience >= 0 ? (
+					<>
+						<li className={classes.list__item}>
+							<p>Height</p>
+							<p>{(height / 10).toFixed(1)}m</p>
+						</li>
+						<li className={classes.list__item}>
+							<p>Weight</p>
+							<p>{(weight / 10).toFixed(1)}kg</p>
+						</li>
+						<li className={classes.list__item}>
+							<p>Base Experience</p>
+							<p>{experience}</p>
+						</li>
+					</>
+				) : (
+					<Skeleton />
+				)}
 			</ul>
+
 			<section className={classes.abilities}>
 				<header className={classes.abilities__header}>Abilities</header>
 				<div className={classes.abilities__info}>

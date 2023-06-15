@@ -8,6 +8,7 @@
 	flex-direction: column;
 	border-radius: 1em;
 	width: 100%;
+	min-height: 35rem;
 }
 
 @media screen and (min-width: 700px) {

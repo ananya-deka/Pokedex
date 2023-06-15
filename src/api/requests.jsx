@@ -1,6 +1,7 @@
 const endpoint = "https://pokeapi.co/api/v2";
-export const imageBaseUrl =
-	"https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world";
+// export const imageBaseUrl =
+// 	"https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world";
+export const imageBaseUrl = "https://img.pokemondb.net/sprites/home/normal/";
 
 const requests = {
 	getAllPokemon: `${endpoint}/pokemon?limit=10`,

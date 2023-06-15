@@ -3,6 +3,7 @@ import { useState } from "react";
 import InfiniteList from "../components/Browse/InfiniteList";
 import useFetch from "../hooks/useFetch";
 import FilterCard from "../components/Filter/FilterCard";
+import Header from "../components/UI/Header";
 
 const FilterPage = () => {
 	const location = useLocation();
@@ -19,9 +20,7 @@ const FilterPage = () => {
 
 	return (
 		<section>
-			<header>
-				<h2>{type}</h2>
-			</header>
+			<Header title={type} />
 			<InfiniteList
 				setCurrentPage={setCurrentPage}
 				isLoading={isLoading}

@@ -11,7 +11,6 @@ const Navbar = () => {
 			? "bookmarks"
 			: "";
 
-	console.log(currentPage);
 	return (
 		<nav className={classes.navbar}>
 			<div className={classes.logo}>

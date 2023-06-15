@@ -1,6 +1,6 @@
-import classes from "./InfiniteList.module.css";
 import Grid from "../Layout/Grid";
 import { useDetectLastNode } from "../../hooks/useDetectLastNode";
+import Header from "../UI/Header";
 
 const InfiniteList = ({
 	title,
@@ -20,10 +20,8 @@ const InfiniteList = ({
 	}
 
 	return (
-		<section className={classes.page}>
-			<header className={classes.page__header}>
-				<h2>{title && title.toUpperCase()}</h2>
-			</header>
+		<section>
+			<Header title={title} />
 			<Grid>
 				{children.map((child, index) =>
 					children.length === index + 1 ? addRef(child) : child

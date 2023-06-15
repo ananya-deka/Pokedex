@@ -1,13 +1,11 @@
 .pokemon_card {
 	transition: transform 0.3s;
-	background-image: radial-gradient(transparent, #20cbe9);
 	border-radius: 0.8em;
+	background-color: whitesmoke;
 }
 
 .pokemon_card:hover {
 	transform: translateY(-8%);
-	background-image: radial-gradient(#20cbe9, #023d47);
-	color: whitesmoke;
 }
 
 .header {
@@ -20,15 +18,14 @@
 }
 
 .pokemon_img_wrapper {
-	box-shadow: inset rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	border-radius: 100%;
 	padding: 1em;
 	width: fit-content;
-
-	background-color: whitesmoke;
+	background-color: transparent;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .pokemon_img {
@@ -40,4 +37,8 @@
 
 .hovered {
 	transform: scale(1.22);
+}
+
+.skeleton {
+	background-color: grey;
 }

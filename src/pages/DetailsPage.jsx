@@ -42,16 +42,7 @@ const DetailPage = () => {
 	return (
 		<section className={classes.container}>
 			<Card>
-				<div
-					className={classes.card_content}
-					style={
-						pokemonSpecies.color
-							? {
-									backgroundImage: `radial-gradient(transparent, ${pokemonSpecies.color.name})`,
-							  }
-							: {}
-					}
-				>
+				<div className={classes.card_content}>
 					<ImageCard
 						id={pokemonDetails.id}
 						name={pokemonDetails.name}
