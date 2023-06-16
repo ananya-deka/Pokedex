@@ -69,6 +69,7 @@
 	border-radius: 0.7em;
 	margin-right: 0.5em;
 	text-transform: capitalize;
+	cursor: pointer;
 }
 
 @media screen and (min-width: 700px) {
