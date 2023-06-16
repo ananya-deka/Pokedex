@@ -5,8 +5,10 @@ import filledBookmarkLogo from "../../assets/bookmark-filled.svg";
 import { useBookmarks } from "../../contexts/bookmark-context";
 import Skeleton from "../UI/Skeleton";
 import fallbackImg from "../../assets/pokeball-png-45337.png";
+import { useNavigate } from "react-router-dom";
 
 const ImageCard = (props) => {
+	const navigate = useNavigate();
 	const id = props.id;
 	const name = props.name || "";
 	const types = props.types || [];
@@ -14,6 +16,11 @@ const ImageCard = (props) => {
 
 	function handleFallback(e) {
 		e.target.src = fallbackImg;
+	}
+
+	function handleTypeNavigation(type) {
+		const id = type.type.url.split("/").at(-2);
+		navigate(`/filter/types/${id}`);
 	}
 
 	return (
@@ -39,12 +46,16 @@ const ImageCard = (props) => {
 
 					<div className={classes.info}>
 						<p className={classes.name}>{name}</p>
-						<p className={classes.id}>#{id}</p>
+						<small className={classes.id}>#{id}</small>
 					</div>
 
 					<ul className={classes.types}>
 						{types.map((type) => (
-							<li className={classes.type} key={type.slot}>
+							<li
+								className={classes.type}
+								key={type.slot}
+								onClick={handleTypeNavigation.bind(null, type)}
+							>
 								{type.type.name}
 							</li>
 						))}

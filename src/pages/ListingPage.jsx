@@ -27,11 +27,12 @@ const ListingPage = () => {
 			isLoading={isLoading}
 			hasMore={hasMore}
 		>
-			{allPokemon.map((pokemon) => (
-				<div key={pokemon.id}>
-					<PokemonCard pokemon={pokemon} />
-				</div>
-			))}
+			{allPokemon &&
+				allPokemon.map((pokemon) => (
+					<div key={pokemon.id}>
+						<PokemonCard pokemon={pokemon} />
+					</div>
+				))}
 		</InfiniteList>
 	);
 };

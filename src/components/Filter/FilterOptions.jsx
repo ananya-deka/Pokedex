@@ -10,7 +10,7 @@ const FilterOptions = () => {
 	const [dest, setDest] = useState("");
 	const [currentPage, setCurrentPage] = useState(0);
 	const { allItems: allFilters, isLoading } = useFetch(
-		[],
+		null,
 		request,
 		currentPage
 	);
@@ -39,6 +39,8 @@ const FilterOptions = () => {
 				? requests.getAllAbilities
 				: dest === "forms"
 				? requests.getAllForms
+				: dest === "types"
+				? requests.getAllTypes
 				: requests.getAllSpecies
 		);
 		setDest(dest);
@@ -54,6 +56,9 @@ const FilterOptions = () => {
 			</FilterOption>
 			<FilterOption onClick={handleNavigation.bind(null, "species")}>
 				Species
+			</FilterOption>
+			<FilterOption onClick={handleNavigation.bind(null, "types")}>
+				Types
 			</FilterOption>
 		</section>
 	);

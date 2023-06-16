@@ -24,9 +24,10 @@ const InfiniteList = ({
 		<section>
 			<Header title={title} />
 			<Grid>
-				{children.map((child, index) =>
-					children.length === index + 1 ? addRef(child) : child
-				)}
+				{children &&
+					children.map((child, index) =>
+						children.length === index + 1 ? addRef(child) : child
+					)}
 				{isLoading && <Spinner />}
 			</Grid>
 		</section>
