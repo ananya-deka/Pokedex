@@ -6,9 +6,11 @@ import Navbar from "./components/UI/Navbar";
 function App() {
 	return (
 		<BookmarksProvider>
-			<Navbar />
-			<section className={classes.container}>
-				<Outlet />
+			<section className={classes.page}>
+				<Navbar />
+				<main className={classes.container}>
+					<Outlet />
+				</main>
 			</section>
 		</BookmarksProvider>
 	);

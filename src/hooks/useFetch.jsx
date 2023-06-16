@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useFetch = (initial, request, pageNumber) => {
-	const [allItems, setAllItems] = useState(initial);
+	const [allItems, setAllItems] = useState(initial || []);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(true);
 
@@ -11,7 +11,7 @@ const useFetch = (initial, request, pageNumber) => {
 	}
 
 	useEffect(() => {
-		if (request && (initial.length === 0 || pageNumber > 1)) {
+		if (request && (!initial || pageNumber > 1)) {
 			setIsLoading(true);
 			const offset = (pageNumber - 1) * 10;
 			fetch(`${request}&offset=${offset}`)

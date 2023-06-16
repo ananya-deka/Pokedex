@@ -8,13 +8,13 @@ const ShowAll = () => {
 	const navigate = useNavigate();
 	const [currentPage, setCurrentPage] = useState(0);
 	const { isLoading, allItems: allPokemon } = useFetch(
-		[],
+		null,
 		requests.getAllPokemon,
 		currentPage
 	);
 
 	useEffect(() => {
-		if (allPokemon.length > 0 && !isLoading) {
+		if (allPokemon?.length > 0 && !isLoading) {
 			navigate("/browse", { state: { pokemon: allPokemon } });
 		}
 	}, [allPokemon, navigate, isLoading]);

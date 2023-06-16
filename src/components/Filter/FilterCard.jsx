@@ -21,42 +21,17 @@ const FilterCard = ({ filter }) => {
 		}
 	}, [filter]);
 
-	async function getPokemon(url) {
-		const response = await fetch(url);
-		const data = await response.json();
-		return data;
-	}
-
 	async function showPokemon() {
-		const pokemon =
-			params.filterType === "abilities"
-				? await Promise.all(
-						info.pokemon.map(
-							async (poke) => await getPokemon(poke.pokemon.url)
-						)
-				  )
-				: params.filterType === "species"
-				? await Promise.all(
-						info.varieties.map(
-							async (poke) => await getPokemon(poke.pokemon.url)
-						)
-				  )
-				: [await getPokemon(info.pokemon.url)];
-
-		navigate(`/filter/${params.filterType}/${info.id}`, {
-			state: {
-				pokemon,
-			},
-		});
+		navigate(`/filter/${params.filterType}/${info.id}`);
 	}
 
 	return (
 		<Card showDetails={showPokemon}>
-			<div className={classes.filter_card}>
-				<header>
-					<h2>{info.name && info.name.toUpperCase()}</h2>
-				</header>
-			</div>
+			{info && (
+				<div className={classes.filter_card}>
+					<p>{info.name}</p>
+				</div>
+			)}
 		</Card>
 	);
 };

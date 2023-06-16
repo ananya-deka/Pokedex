@@ -59,6 +59,7 @@ const DetailPage = () => {
 						stats={pokemonDetails.stats}
 						species={pokemonSpecies}
 						moves={pokemonDetails.moves}
+						color={pokemonSpecies.color}
 					/>
 				</div>
 			</Card>

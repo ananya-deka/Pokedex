@@ -1,17 +1,18 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { useState } from "react";
 import InfiniteList from "../components/Browse/InfiniteList";
 import useFetch from "../hooks/useFetch";
 import FilterCard from "../components/Filter/FilterCard";
 import Header from "../components/UI/Header";
+import requests from "../api/requests";
 
 const FilterPage = () => {
-	const location = useLocation();
 	const [currentPage, setCurrentPage] = useState(1);
 	const params = useParams();
 	const type = params.filterType;
-	const { filters } = location.state || [];
-	const { request } = location.state || "";
+
+	const { filters, request } = useLoaderData();
+
 	const {
 		allItems: allFilters,
 		isLoading,
@@ -20,7 +21,9 @@ const FilterPage = () => {
 
 	return (
 		<section>
-			<Header title={type} />
+			<div style={{ marginBottom: `${2}rem` }}>
+				<Header title={type} />
+			</div>
 			<InfiniteList
 				setCurrentPage={setCurrentPage}
 				isLoading={isLoading}
@@ -28,7 +31,7 @@ const FilterPage = () => {
 			>
 				{allFilters &&
 					allFilters.map((filter) => (
-						<div key={filter.id}>
+						<div key={filter.name}>
 							<FilterCard filter={filter} />
 						</div>
 					))}
@@ -36,5 +39,33 @@ const FilterPage = () => {
 		</section>
 	);
 };
+
+export async function loader({ params }) {
+	const filterType = params.filterType;
+
+	if (
+		filterType !== "abilities" &&
+		filterType !== "forms" &&
+		filterType !== "species" &&
+		filterType !== "types"
+	) {
+		throw new Error("Invalid path");
+	}
+
+	const request =
+		filterType === "abilities"
+			? requests.getAllAbilities
+			: filterType === "forms"
+			? requests.getAllForms
+			: filterType === "species"
+			? requests.getAllSpecies
+			: requests.getAllTypes;
+
+	const response = await fetch(request);
+	const data = await response.json();
+	const filters = data.results;
+
+	return { filters, request };
+}
 
 export default FilterPage;

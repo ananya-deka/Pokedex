@@ -6,7 +6,7 @@ import ShowAll from "../components/Browse/ShowAll";
 import FilterOptions from "../components/Filter/FilterOptions";
 import SearchBar from "../components/UI/SearchBar";
 import pokemonLogo from "../assets/pokemon-logo.png";
-import { Spinner } from "@chakra-ui/react";
+import Spinner from "../components/UI/Spinner";
 
 const SearchPage = () => {
 	const inputRef = useRef();
@@ -41,9 +41,18 @@ const SearchPage = () => {
 
 	return (
 		<section className={classes.container}>
-			<div className={classes.logo_wrapper}>
-				<img src={pokemonLogo} alt="Pokemon" height={200} width={300} />
+			<div className={classes.img}>
+				<div className={classes.logo_wrapper}>
+					<img
+						className={classes.logo}
+						src={pokemonLogo}
+						alt="Pokemon"
+						height={200}
+						width={500}
+					/>
+				</div>
 			</div>
+
 			<SearchBar
 				placeholder="Search for your favourite pokemon"
 				ref={inputRef}
@@ -53,7 +62,7 @@ const SearchPage = () => {
 			<div className={classes.status}>
 				{isLoading && (
 					<>
-						Loading...
+						<b>Loading...</b>
 						<Spinner />
 					</>
 				)}
@@ -63,7 +72,6 @@ const SearchPage = () => {
 				<p>OR...</p>
 			</div>
 			<ShowAll />
-
 			<FilterOptions />
 		</section>
 	);

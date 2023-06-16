@@ -1,13 +1,12 @@
 import Grid from "../Layout/Grid";
 import { useDetectLastNode } from "../../hooks/useDetectLastNode";
-import Header from "../UI/Header";
-import { Spinner } from "@chakra-ui/react";
+import Spinner from "../UI/Spinner";
 
 const InfiniteList = ({
-	title,
 	isLoading,
 	hasMore,
 	setCurrentPage,
+	display,
 	children,
 }) => {
 	const { lastNodeObserver } = useDetectLastNode(
@@ -22,12 +21,12 @@ const InfiniteList = ({
 
 	return (
 		<section>
-			<Header title={title} />
-			<Grid>
-				{children.map((child, index) =>
-					children.length === index + 1 ? addRef(child) : child
-				)}
-				{isLoading && <Spinner />}
+			<Grid display={display}>
+				{children &&
+					children.map((child, index) =>
+						children.length === index + 1 ? addRef(child) : child
+					)}
+				<div>{isLoading && <Spinner />}</div>
 			</Grid>
 		</section>
 	);

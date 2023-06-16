@@ -58,7 +58,11 @@ const PokemonCard = ({ pokemon }) => {
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
-			<Card showDetails={handleNavigation} key={pokemon.id}>
+			<Card
+				showDetails={handleNavigation}
+				key={pokemon.id}
+				className={classes.padding}
+			>
 				<header className={classes.header}>
 					<h2>{pokemon.name && pokemon.name.toUpperCase()}</h2>
 				</header>

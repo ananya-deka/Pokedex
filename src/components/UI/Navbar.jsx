@@ -14,7 +14,7 @@ const Navbar = () => {
 	return (
 		<nav className={classes.navbar}>
 			<div className={classes.logo}>
-				<Link to={"/"}>
+				<Link className={classes.link} to={"/"}>
 					<img src={pokemonLogo} width={50} height={50} />
 				</Link>
 			</div>
@@ -24,14 +24,18 @@ const Navbar = () => {
 						currentPage === "home" ? classes.selected : null
 					}`}
 				>
-					<Link to={"/"}>Home</Link>
+					<Link className={classes.link} to={"/"}>
+						Home
+					</Link>
 				</li>
 				<li
 					className={`${classes.navbar__option} ${
 						currentPage === "bookmarks" ? classes.selected : null
 					}`}
 				>
-					<Link to={"/bookmarks"}>Bookmarks</Link>
+					<Link className={classes.link} to={"/bookmarks"}>
+						Bookmarks
+					</Link>
 				</li>
 			</ul>
 		</nav>

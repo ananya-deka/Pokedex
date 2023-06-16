@@ -1,16 +1,19 @@
+import classes from "./ListingPage.module.css";
 import { useLocation, useParams } from "react-router-dom";
 import List from "../components/Browse/List";
 import InfiniteList from "../components/Browse/InfiniteList";
 import useFetch from "../hooks/useFetch";
 import PokemonCard from "../components/Browse/PokemonCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import requests from "../api/requests";
+import Header from "../components/UI/Header";
+import FilterSelect from "../components/Filter/FilterSelect";
 
 const ListingPage = () => {
+	const [pokemon, setPokemon] = useState();
 	const location = useLocation();
 	const [currentPage, setCurrentPage] = useState(1);
 	const params = useParams();
-	const { pokemon } = location.state || [];
 
 	const {
 		allItems: allPokemon,
@@ -18,21 +21,49 @@ const ListingPage = () => {
 		hasMore,
 	} = useFetch(pokemon, requests.getAllPokemon, currentPage);
 
-	return params.id || params.filterId ? (
-		<List pokemons={pokemon} />
-	) : (
-		<InfiniteList
-			title="Pokemon"
-			setCurrentPage={setCurrentPage}
-			isLoading={isLoading}
-			hasMore={hasMore}
-		>
-			{allPokemon.map((pokemon) => (
-				<div key={pokemon.id}>
-					<PokemonCard pokemon={pokemon} />
-				</div>
-			))}
-		</InfiniteList>
+	useEffect(() => {
+		async function getPokemon(id) {
+			const response = await fetch(requests.getPokemon(id));
+			const data = await response.json();
+			setPokemon([data]);
+		}
+
+		if (params.id) {
+			if (location.state?.pokemon) {
+				setPokemon(location.state.pokemon);
+			} else {
+				getPokemon(params.id);
+			}
+		}
+	}, [params.id, location.state, setPokemon]);
+
+	return (
+		<>
+			{params.id ? (
+				<List pokemons={pokemon} />
+			) : (
+				<>
+					<div className={classes.header}>
+						<Header title="Pokemons" />
+						<FilterSelect />
+					</div>
+
+					<InfiniteList
+						title="Pokemon"
+						setCurrentPage={setCurrentPage}
+						isLoading={isLoading}
+						hasMore={hasMore}
+					>
+						{allPokemon &&
+							allPokemon.map((pokemon) => (
+								<div key={pokemon.id}>
+									<PokemonCard pokemon={pokemon} />
+								</div>
+							))}
+					</InfiniteList>
+				</>
+			)}
+		</>
 	);
 };
 
