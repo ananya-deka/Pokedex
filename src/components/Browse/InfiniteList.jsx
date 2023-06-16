@@ -26,7 +26,6 @@ const InfiniteList = ({
 					children.map((child, index) =>
 						children.length === index + 1 ? addRef(child) : child
 					)}
-				{children?.length === 0 && <b>No results found</b>}
 
 				<div>{isLoading && <Spinner />}</div>
 			</Grid>

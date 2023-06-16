@@ -7,7 +7,14 @@ const BookmarksPage = () => {
 	return (
 		<>
 			<Header title="My Bookmarks" />
+			<div style={{ marginBottom: `${2}rem` }}></div>
 			<List pokemons={Object.values(bookmarks)} />
+			{!bookmarks ||
+				(Object.values(bookmarks).length === 0 && (
+					<p style={{ color: "grey" }}>
+						You have not added anything here yet.
+					</p>
+				))}
 		</>
 	);
 };
