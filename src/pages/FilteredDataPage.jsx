@@ -1,9 +1,11 @@
+import classes from "./FilteredData.module.css";
 import { useLoaderData, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../components/UI/Header";
 import requests from "../api/requests";
 import InfiniteList from "../components/Browse/InfiniteList";
 import PokemonCard from "../components/Browse/PokemonCard";
+import FilterSelect from "../components/Filter/FilterSelect";
 
 const FilteredDataPage = () => {
 	const [pokemon, setPokemon] = useState([]);
@@ -14,6 +16,14 @@ const FilteredDataPage = () => {
 	const { filteredData } = useLoaderData();
 	const params = useParams();
 	const filterType = params.filterType;
+	const filterId = params.filterId;
+
+	useEffect(() => {
+		setCurrentPage(1);
+		setHasMore(false);
+		setIsLoading(false);
+		setPokemon([]);
+	}, [filterId]);
 
 	useEffect(() => {
 		async function getPokemonUrls() {
@@ -54,7 +64,11 @@ const FilteredDataPage = () => {
 
 	return (
 		<>
-			<Header title={`${filterType} > ${filteredData.name}`} />
+			<div className={classes.header}>
+				<Header title={`${filterType} > ${filteredData.name}`} />
+				{filterType === "types" && <FilterSelect />}
+			</div>
+
 			<InfiniteList
 				isLoading={isLoading}
 				hasMore={hasMore}

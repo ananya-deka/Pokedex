@@ -1,3 +1,4 @@
+import classes from "./ListingPage.module.css";
 import { useLocation, useParams } from "react-router-dom";
 import List from "../components/Browse/List";
 import InfiniteList from "../components/Browse/InfiniteList";
@@ -5,6 +6,8 @@ import useFetch from "../hooks/useFetch";
 import PokemonCard from "../components/Browse/PokemonCard";
 import { useEffect, useState } from "react";
 import requests from "../api/requests";
+import Header from "../components/UI/Header";
+import FilterSelect from "../components/Filter/FilterSelect";
 
 const ListingPage = () => {
 	const [pokemon, setPokemon] = useState();
@@ -34,22 +37,33 @@ const ListingPage = () => {
 		}
 	}, [params.id, location.state, setPokemon]);
 
-	return params.id ? (
-		<List pokemons={pokemon} />
-	) : (
-		<InfiniteList
-			title="Pokemon"
-			setCurrentPage={setCurrentPage}
-			isLoading={isLoading}
-			hasMore={hasMore}
-		>
-			{allPokemon &&
-				allPokemon.map((pokemon) => (
-					<div key={pokemon.id}>
-						<PokemonCard pokemon={pokemon} />
+	return (
+		<>
+			{params.id ? (
+				<List pokemons={pokemon} />
+			) : (
+				<>
+					<div className={classes.header}>
+						<Header title="Pokemons" />
+						<FilterSelect />
 					</div>
-				))}
-		</InfiniteList>
+
+					<InfiniteList
+						title="Pokemon"
+						setCurrentPage={setCurrentPage}
+						isLoading={isLoading}
+						hasMore={hasMore}
+					>
+						{allPokemon &&
+							allPokemon.map((pokemon) => (
+								<div key={pokemon.id}>
+									<PokemonCard pokemon={pokemon} />
+								</div>
+							))}
+					</InfiniteList>
+				</>
+			)}
+		</>
 	);
 };
 

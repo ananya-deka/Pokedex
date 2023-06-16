@@ -1,15 +1,8 @@
 import Grid from "../Layout/Grid";
 import { useDetectLastNode } from "../../hooks/useDetectLastNode";
-import Header from "../UI/Header";
 import Spinner from "../UI/Spinner";
 
-const InfiniteList = ({
-	title,
-	isLoading,
-	hasMore,
-	setCurrentPage,
-	children,
-}) => {
+const InfiniteList = ({ isLoading, hasMore, setCurrentPage, children }) => {
 	const { lastNodeObserver } = useDetectLastNode(
 		isLoading,
 		hasMore,
@@ -22,7 +15,6 @@ const InfiniteList = ({
 
 	return (
 		<section>
-			<Header title={title} />
 			<Grid>
 				{children &&
 					children.map((child, index) =>

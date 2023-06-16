@@ -21,7 +21,9 @@ const FilterPage = () => {
 
 	return (
 		<section>
-			<Header title={type} />
+			<div style={{ marginBottom: `${2}rem` }}>
+				<Header title={type} />
+			</div>
 			<InfiniteList
 				setCurrentPage={setCurrentPage}
 				isLoading={isLoading}

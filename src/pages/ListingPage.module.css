@@ -1,0 +1,14 @@
+.header {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: space-between;
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 650px) {
+	.header {
+		flex-direction: row;
+	}
+}
