@@ -5,4 +5,4 @@ A pokedex app that consumes the (PokéAPI)[https://pokeapi.co], and allows you t
 
 ## Demo
 
-(Pokedex)[pokedex-terous.netlify.app]
+(Pokedex)[https://pokedex-terous.netlify.app/]
