@@ -53,6 +53,15 @@ export async function loader({ params }) {
 	const filterType = params.filterType;
 	const id = params.filterId;
 
+	if (
+		filterType !== "abilities" &&
+		filterType !== "forms" &&
+		filterType !== "species" &&
+		filterType !== "types"
+	) {
+		throw new Error("Invalid path");
+	}
+
 	const response = await fetch(
 		filterType === "abilities"
 			? requests.getAbilityById(id)
@@ -60,10 +69,14 @@ export async function loader({ params }) {
 			? requests.getFormById(id)
 			: filterType === "species"
 			? requests.getSpeciesById(id)
-			: filterType === "types"
-			? requests.getTypeById(id)
-			: null
+			: requests.getTypeById(id)
 	);
+
+	if (!response.ok) {
+		const error = await response.text();
+		throw new Error(error);
+	}
+
 	const filteredData = await response.json();
 
 	return { filteredData };

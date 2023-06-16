@@ -41,6 +41,15 @@ const FilterPage = () => {
 export async function loader({ params }) {
 	const filterType = params.filterType;
 
+	if (
+		filterType !== "abilities" &&
+		filterType !== "forms" &&
+		filterType !== "species" &&
+		filterType !== "types"
+	) {
+		throw new Error("Invalid path");
+	}
+
 	const request =
 		filterType === "abilities"
 			? requests.getAllAbilities
@@ -48,9 +57,7 @@ export async function loader({ params }) {
 			? requests.getAllForms
 			: filterType === "species"
 			? requests.getAllSpecies
-			: filterType === "types"
-			? requests.getAllTypes
-			: null;
+			: requests.getAllTypes;
 
 	const response = await fetch(request);
 	const data = await response.json();
@@ -60,23 +67,3 @@ export async function loader({ params }) {
 }
 
 export default FilterPage;
-
-// const id = params.id;
-
-// 	if (id) {
-// 		const request =
-// 			filterType === "abilities"
-// 				? requests.getAbility
-// 				: filterType === "forms"
-// 				? requests.getForm
-// 				: filterType === "species"
-// 				? requests.getSpeciesById.bind(null, id)
-// 				: filterType === "types"
-// 				? requests.getTypeById.bind(null, id)
-// 				: null;
-
-// 		const response = await fetch(request);
-// 		const data = await response.json();
-
-// 		return { data };
-// 	}

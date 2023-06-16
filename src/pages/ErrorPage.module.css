@@ -1,0 +1,34 @@
+.error_page {
+	min-height: 100vh;
+	display: grid;
+	place-content: center;
+}
+
+.card_content {
+	padding: 2em;
+}
+
+.error {
+	max-width: 90%;
+	width: 60rem;
+}
+
+.message {
+	min-height: 10rem;
+}
+
+.template {
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+
+.return_btn {
+	padding: 0.5em 1em;
+	border-radius: 0.5em;
+	border: 1px solid #ebb02d;
+	background-color: #ebb02d;
+}
+
+.return_btn:hover {
+	background-color: #f7c352;
+}

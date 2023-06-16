@@ -11,11 +11,13 @@ import FilterPage, { loader as filterLoader } from "./pages/FilterPage.jsx";
 import FilteredDataPage, {
 	loader as filteredDataLoader,
 } from "./pages/FilteredDataPage.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: "/",
