@@ -4,7 +4,7 @@ import bookmarkLogo from "../../assets/bookmark.svg";
 import filledBookmarkLogo from "../../assets/bookmark-filled.svg";
 import { useBookmarks } from "../../contexts/bookmark-context";
 import Skeleton from "../UI/Skeleton";
-import fallbackImg from "../../assets/pokeball-png-45337.png";
+import fallbackImg from "../../assets/pokeball.png";
 import { useNavigate } from "react-router-dom";
 
 const ImageCard = (props) => {
@@ -33,6 +33,7 @@ const ImageCard = (props) => {
 							onClick={props.addToBookmark}
 						>
 							<img
+								loading="lazy"
 								src={
 									bookmarks[id]
 										? filledBookmarkLogo

@@ -1,6 +1,6 @@
 import classes from "./Navbar.module.css";
 import { Link, useLocation } from "react-router-dom";
-import pokemonLogo from "../../assets/pokemon-icon.png";
+import pokemonLogo from "../../assets/pokeball.png";
 
 const Navbar = () => {
 	const location = useLocation();

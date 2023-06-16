@@ -3,7 +3,7 @@ import Card from "../UI/Card";
 import { imageBaseUrl } from "../../api/requests";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import fallbackImg from "../../assets/pokeball-png-45337.png";
+import fallbackImg from "../../assets/pokeball.png";
 
 const PokemonCard = ({ pokemon }) => {
 	const navigate = useNavigate();
@@ -76,6 +76,7 @@ const PokemonCard = ({ pokemon }) => {
 						className={`${classes.pokemon_img} ${
 							hovered ? classes.hovered : null
 						}`}
+						loading="lazy"
 						src={`${imageBaseUrl}/${pokemon.name}.png`}
 						width={200}
 						height={100}
