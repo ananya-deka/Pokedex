@@ -73,6 +73,7 @@ const FilteredDataPage = () => {
 				isLoading={isLoading}
 				hasMore={hasMore}
 				setCurrentPage={setCurrentPage}
+				display={pokemon?.length > 3 ? "grid" : "flex"}
 			>
 				{pokemon?.map((poke) => (
 					<div key={poke.id}>
