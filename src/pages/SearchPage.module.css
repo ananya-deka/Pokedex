@@ -1,15 +1,27 @@
 .container {
-	max-width: 50rem;
-	width: 95%;
+	width: 50rem;
+	max-width: 100%;
 	margin: 2rem auto;
 	display: grid;
 	gap: 2rem;
 }
 
+.img {
+	width: 100%;
+}
+
 .logo_wrapper {
+	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	max-width: 500px;
+}
+
+.logo {
+	width: 100%;
+	height: auto;
+	aspect-ratio: attr(width) / attr(height);
 }
 
 .text {
@@ -27,4 +39,8 @@
 
 .error {
 	color: red;
+}
+
+.spinner {
+	outline: 1px solid red;
 }

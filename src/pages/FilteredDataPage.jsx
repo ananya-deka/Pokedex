@@ -2,49 +2,70 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../components/UI/Header";
 import requests from "../api/requests";
-import List from "../components/Browse/List";
+import InfiniteList from "../components/Browse/InfiniteList";
+import PokemonCard from "../components/Browse/PokemonCard";
 
 const FilteredDataPage = () => {
 	const [pokemon, setPokemon] = useState([]);
+	const [pokemonUrls, setPokemonUrls] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [isLoading, setIsLoading] = useState(false);
+	const [hasMore, setHasMore] = useState(false);
 	const { filteredData } = useLoaderData();
 	const params = useParams();
 	const filterType = params.filterType;
+
+	useEffect(() => {
+		async function getPokemonUrls() {
+			const pokemonUrls =
+				filterType === "abilities" || filterType === "types"
+					? filteredData.pokemon.map((poke) => poke.pokemon.url)
+					: filterType === "species"
+					? filteredData.varieties.map((poke) => poke.pokemon.url)
+					: [filteredData.pokemon.url];
+			setPokemonUrls(pokemonUrls);
+		}
+
+		getPokemonUrls();
+	}, [filterType, filteredData.pokemon, filteredData.varieties]);
+
 	useEffect(() => {
 		async function getPokemon(url) {
 			const response = await fetch(url);
 			const data = await response.json();
 			return data;
 		}
-
-		async function getPokemonData() {
-			const pokemon =
-				filterType === "abilities" || filterType === "types"
-					? await Promise.all(
-							filteredData.pokemon.map(
-								async (poke) =>
-									await getPokemon(poke.pokemon.url)
-							)
-					  )
-					: filterType === "species"
-					? await Promise.all(
-							filteredData.varieties.map(
-								async (poke) =>
-									await getPokemon(poke.pokemon.url)
-							)
-					  )
-					: [await getPokemon(filteredData.pokemon.url)];
-
-			console.log(pokemon);
-			setPokemon(pokemon);
-		}
-
-		getPokemonData();
-	}, [filterType, filteredData.pokemon, filteredData.varieties]);
+		setIsLoading(true);
+		const start = (currentPage - 1) * 10;
+		Promise.all(
+			pokemonUrls
+				?.slice(start, start + 10)
+				.map(async (url) => await getPokemon(url))
+		).then((pokemonSlice) => {
+			setPokemon((prevPokemon) =>
+				currentPage === 1
+					? pokemonSlice
+					: [...prevPokemon, ...pokemonSlice]
+			);
+			setIsLoading(false);
+			setHasMore(start + 10 <= pokemonUrls.length);
+		});
+	}, [pokemonUrls, currentPage]);
 
 	return (
 		<>
 			<Header title={`${filterType} > ${filteredData.name}`} />
-			<List pokemons={pokemon} />
+			<InfiniteList
+				isLoading={isLoading}
+				hasMore={hasMore}
+				setCurrentPage={setCurrentPage}
+			>
+				{pokemon?.map((poke) => (
+					<div key={poke.id}>
+						<PokemonCard pokemon={poke} />
+					</div>
+				))}
+			</InfiniteList>
 		</>
 	);
 };

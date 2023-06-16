@@ -1,3 +1,8 @@
+.page {
+	min-height: 100vh;
+	background-color: whitesmoke;
+}
+
 .container {
 	padding: 1em 3em;
 }

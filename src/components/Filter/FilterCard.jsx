@@ -27,11 +27,11 @@ const FilterCard = ({ filter }) => {
 
 	return (
 		<Card showDetails={showPokemon}>
-			<div className={classes.filter_card}>
-				<header>
-					<h2>{info.name && info.name.toUpperCase()}</h2>
-				</header>
-			</div>
+			{info && (
+				<div className={classes.filter_card}>
+					<p>{info.name}</p>
+				</div>
+			)}
 		</Card>
 	);
 };

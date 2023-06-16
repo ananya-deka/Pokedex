@@ -74,7 +74,7 @@ const ImageCard = (props) => {
 						>
 							<img
 								className={classes.pokemon_img}
-								width="250"
+								width="200"
 								height="200"
 								src={`${imageBaseUrl}/${name}.png`}
 								onError={handleFallback}
